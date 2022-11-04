@@ -16,3 +16,13 @@ CREATE TABLE `recipes`.`rezepte` (
   #
   #
   #
+  CREATE TABLE `recipes`.`user` (
+  `iduser` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `pw` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`iduser`),
+  UNIQUE INDEX `user_UNIQUE` (`user` ASC) VISIBLE
+  );
+#
+#
+#
