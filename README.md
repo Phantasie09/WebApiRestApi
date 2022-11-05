@@ -3,27 +3,26 @@
 #
 #
 CREATE TABLE `recipes`.`rezepte` (
-  `idRecipes` INT NOT NULL AUTO_INCREMENT,
+  `idrezepte` INT NOT NULL AUTO_INCREMENT,
   `Foodtyp` VARCHAR(20) NULL DEFAULT 'AllyouCanEat',
   `Duration` INT NULL DEFAULT -1,
   `Name` VARCHAR(45) NOT NULL,
   `Varianten` JSON NULL,
   `Ingredients` JSON NOT NULL,
   `Category` VARCHAR(20) NOT NULL,
-  'suess' TINYINT NULL,
+  `suess` TINYINT NULL,
   `Link` VARCHAR(60) NULL,
-  PRIMARY KEY (`idRecipes`));
+  PRIMARY KEY (`idrezepte`));
   #
-  CREATE TABLE `recipes`.`user` (
+ CREATE TABLE `recipes`.`user` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `pw` VARCHAR(45) NOT NULL,
+  `passwort` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`iduser`),
-  UNIQUE INDEX `user_UNIQUE` (`user` ASC) VISIBLE
-  );
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
 #
 CREATE TABLE `recipes`.`zutaten` (
-  `idzutaten` INT NOT NULL,
+  `idzutaten` INT NOT NULL AUTO_INCREMENT,
   `name` INT NOT NULL,
   `einheit` VARCHAR(45) NOT NULL,
   `haltbarkeit` TIME NULL,
@@ -52,27 +51,37 @@ CREATE TABLE `recipes`.`zutaten` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     #
-    CREATE TABLE `recipes`.`webai` (
-  `idwebAi` INT NOT NULL,
+    CREATE TABLE `recipes`.`gerichte` (
+  `idgerichte` INT NOT NULL AUTO_INCREMENT,
+  `art` VARCHAR(20) NOT NULL,
+  `dauer` TIME NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `suess` TINYINT NULL,
+  `zutaten` JSON NOT NULL,
+  `kategorie` VARCHAR(45) NOT NULL,
+  `link` VARCHAR(60) NULL,
+  PRIMARY KEY (`idgerichte`));
+  #
+  CREATE TABLE `recipes`.`webai` (
+  `idwebai` INT NOT NULL AUTO_INCREMENT,
+  `gerichteId` INT NULL,
   `accId` INT NULL,
-  `recipeId` INT NULL,
   `neu` TINYINT NULL,
-  `bewertung` INT NULL,
-  `lastCooked` DATE NULL,
+  `rating` INT NULL,
+  `lasteaten` DATE NULL,
+  `score` INT NULL,
   `missing` JSON NULL,
-  `possesing` JSON NULL,
-  `Score` INT NULL,
-  PRIMARY KEY (`idwebAi`),
+  `having` JSON NULL,
+  PRIMARY KEY (`idwebai`),
   INDEX `accId_idx` (`accId` ASC) VISIBLE,
-  CONSTRAINT `accId`
+  INDEX `gerichteId_idx` (`gerichteId` ASC) VISIBLE,
+  CONSTRAINT `fk_gerichteId`
+    FOREIGN KEY (`gerichteIdgerichteId`)
+    REFERENCES `recipes`.`gerichte` (`idgerichte`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_accId`
     FOREIGN KEY (`accId`)
     REFERENCES `recipes`.`user` (`iduser`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `recipeId`
-    FOREIGN KEY ()
-    REFERENCES `recipes`.`inventory` ()
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-    
