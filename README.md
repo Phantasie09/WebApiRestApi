@@ -10,6 +10,7 @@ CREATE TABLE `recipes`.`rezepte` (
   `Varianten` JSON NULL,
   `Ingredients` JSON NOT NULL,
   `Category` VARCHAR(20) NOT NULL,
+  'suess' TINYINT NULL,
   `Link` VARCHAR(60) NULL,
   PRIMARY KEY (`idRecipes`));
   #
@@ -51,4 +52,27 @@ CREATE TABLE `recipes`.`zutaten` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     #
+    CREATE TABLE `recipes`.`webai` (
+  `idwebAi` INT NOT NULL,
+  `accId` INT NULL,
+  `recipeId` INT NULL,
+  `neu` TINYINT NULL,
+  `bewertung` INT NULL,
+  `lastCooked` DATE NULL,
+  `missing` JSON NULL,
+  `possesing` JSON NULL,
+  `Score` INT NULL,
+  PRIMARY KEY (`idwebAi`),
+  INDEX `accId_idx` (`accId` ASC) VISIBLE,
+  CONSTRAINT `accId`
+    FOREIGN KEY (`accId`)
+    REFERENCES `recipes`.`user` (`iduser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `recipeId`
+    FOREIGN KEY ()
+    REFERENCES `recipes`.`inventory` ()
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
     
