@@ -2,17 +2,23 @@
 #Backend Mysql Database
 #
 #
-CREATE TABLE `recipes`.`rezepte` (
-  `idrezepte` INT NOT NULL AUTO_INCREMENT,
-  `Foodtyp` VARCHAR(20) NULL DEFAULT 'AllyouCanEat',
-  `Duration` INT NULL DEFAULT -1,
-  `Name` VARCHAR(45) NOT NULL,
-  `Varianten` JSON NULL,
-  `Ingredients` JSON NOT NULL,
-  `Category` VARCHAR(20) NOT NULL,
+ CREATE TABLE `recipes`.`gerichte` (
+  `idgerichte` INT NOT NULL AUTO_INCREMENT,
+  `art` VARCHAR(20) NOT NULL,
+  `dauer` TIME NULL,
+  `name` VARCHAR(45) NOT NULL,
   `suess` TINYINT NULL,
-  `Link` VARCHAR(60) NULL,
-  PRIMARY KEY (`idrezepte`));
+  `zutaten` JSON NOT NULL,
+  `kategorie` VARCHAR(45) NOT NULL,
+  `link` VARCHAR(60) NULL,
+  `varianten` INT NULL,
+  PRIMARY KEY (`idgerichte`),
+  CONSTRAINT `fk_varianten`
+    FOREIGN KEY (`varianten`)
+    REFERENCES `recipes`.`gerichte` (`idgerichte`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+  );
   #
  CREATE TABLE `recipes`.`user` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
@@ -51,17 +57,6 @@ CREATE TABLE `recipes`.`zutaten` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     #
-    CREATE TABLE `recipes`.`gerichte` (
-  `idgerichte` INT NOT NULL AUTO_INCREMENT,
-  `art` VARCHAR(20) NOT NULL,
-  `dauer` TIME NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `suess` TINYINT NULL,
-  `zutaten` JSON NOT NULL,
-  `kategorie` VARCHAR(45) NOT NULL,
-  `link` VARCHAR(60) NULL,
-  PRIMARY KEY (`idgerichte`));
-  #
   CREATE TABLE `recipes`.`webai` (
   `idwebai` INT NOT NULL AUTO_INCREMENT,
   `gerichteId` INT NULL,
