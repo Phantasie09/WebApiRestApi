@@ -80,3 +80,23 @@ CREATE TABLE `recipes`.`zutaten` (
     REFERENCES `recipes`.`user` (`iduser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+    #
+    CREATE TABLE `recipes`.`portionator` (
+  `idportionator` INT NOT NULL AUTO_INCREMENT,
+  `menge` INT NULL,
+  `einheit` VARCHAR(45) NULL,
+  `idrezepte` INT NULL,
+  `idzutaten` INT NULL,
+  PRIMARY KEY (`idportionator`),
+  INDEX `fk_zutatId_idx` (`idzutaten` ASC) VISIBLE,
+    INDEX `fk_rezeptIdx` (`idrezepte` ASC) VISIBLE,
+  CONSTRAINT `fk_rezeptId`
+    FOREIGN KEY (`idrezepte`)
+    REFERENCES `recipes`.`gerichte` (`idgerichte`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_zutatId`
+    FOREIGN KEY (`idzutaten`)
+    REFERENCES `recipes`.`zutaten` (`idzutaten`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
