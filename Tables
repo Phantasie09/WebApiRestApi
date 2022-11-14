@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXIST `food_pcl`.`recipes`  (
+CREATE TABLE  `food_pcl`.`recipes`  (
   `id_rec` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(20) NOT NULL,
   `duration` TIME NULL,
@@ -15,14 +15,14 @@ CREATE TABLE IF NOT EXIST `food_pcl`.`recipes`  (
     ON UPDATE NO ACTION
   );
   #
-  CREATE TABLE IF NOT EXIST `food_pcl`.`user` (
+  CREATE TABLE `food_pcl`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
   #
-  CREATE TABLE IF NOT EXIST `food_pcl`.`incredients` (
+  CREATE TABLE  `food_pcl`.`incredients` (
   `id_inc` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `unit` VARCHAR(45) NOT NULL,
