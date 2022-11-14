@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXIST `food_pcl`.`recipes`  (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
   #
-  CREATE TABLE `food_pcl`.`incredients` (
+  CREATE TABLE IF NOT EXIST `food_pcl`.`incredients` (
   `id_inc` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `unit` VARCHAR(45) NOT NULL,
